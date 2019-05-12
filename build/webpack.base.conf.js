@@ -9,8 +9,7 @@ var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
-// const MpvueEntry = require('mpvue-entry')
-// const entry = MpvueEntry.getEntry('./src/router/index.js')
+const MpvueEntry = require('mpvue-entry')
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -26,15 +25,18 @@ function getEntry(rootSrc) {
     return map;
 }
 
-const appEntry = {app: resolve('./src/main.js')}
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
-const entry = Object.assign({}, appEntry, pagesEntry)
+// const appEntry = {app: resolve('./src/main.js')}
+// const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
+// const entry = Object.assign({}, appEntry, pagesEntry)
 
 let baseWebpackConfig = {
     // 如果要自定义生成的 dist 目录里面的文件路径，
     // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
     // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
-    entry,
+    entry: MpvueEntry.getEntry({
+        pages:'src/router/index.js',
+        dist:'dist/wx'
+    }),
     target: require('mpvue-webpack-target'),
     output: {
         path: config.build.assetsRoot,
@@ -114,19 +116,19 @@ let baseWebpackConfig = {
     },
     plugins: [
         // 集中式管理router
-        // new MpvueEntry(),
+        new MpvueEntry(),
         // api 统一桥协议方案
         new webpack.DefinePlugin({
             'mpvue': 'global.mpvue',
             'mpvuePlatform': 'global.mpvuePlatform'
         }),
         new MpvuePlugin(),
-        new CopyWebpackPlugin([{
-            from: '**/*.json',
-            to: ''
-        }], {
-            context: 'src/'
-        }),
+        // new CopyWebpackPlugin([{
+        //     from: '**/*.json',
+        //     to: ''
+        // }], {
+        //     context: 'src/'
+        // }),
         new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, '../static'),

@@ -9,6 +9,7 @@ Vue.use(MpVueRouterPatch)
 Vue.config.productionTip = false
 Vue.prototype.$store = Store
 Vue.prototype.$axios = Axios
+// Vue.prototype.$router = MpVueRouterPatch
 // Vue.prototype.$i18n = VueI18n
 
 App.mpType = 'app'

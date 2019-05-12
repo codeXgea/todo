@@ -4,6 +4,7 @@
             <!--<img src="" alt="">-->
         </div>
         <van-button type="primary" @click="func">123</van-button>
+        <van-button @click="exchange">路由跳转</van-button>
     </div>
 </template>
 
@@ -23,6 +24,9 @@
             func() {
 //                toast("ai")
                 console.log(1)
+            },
+            exchange(){
+                this.$router.replace('/pages/index/index')
             }
 
         },
