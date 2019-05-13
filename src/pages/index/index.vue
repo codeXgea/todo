@@ -35,6 +35,7 @@
 
 <script>
 import card from '@/components/card'
+import { dataEncoder,dataDecoder } from '@/axios/des'
 
 export default {
   data () {

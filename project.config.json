@@ -9,7 +9,7 @@
 		"autoAudits": false,
 		"checkInvalidKey": true
 	},
-	"miniprogramRoot": "./dist/wx",
+	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
 	"appid": "wx4123c9bf7021b6f8",
 	"projectname": "firstaaa",
